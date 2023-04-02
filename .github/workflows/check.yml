@@ -31,4 +31,6 @@ jobs:
           node-version: ${{ steps.node-version.outputs.determined }}
           cache: pnpm
 
+      - run: pnpm install
+
       - run: pnpm ${{ matrix.cmd }}
