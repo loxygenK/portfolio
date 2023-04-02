@@ -11,8 +11,19 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+function main() {
+  const root = document.getElementById("root");
+  if (root == undefined) {
+    throw new Error(
+      "No element with id 'root' found! Application will not be mounted."
+    );
+  }
+
+  ReactDOM.createRoot(root).render(
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  );
+}
+
+main();

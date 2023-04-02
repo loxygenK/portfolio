@@ -7,7 +7,8 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:tailwindcss/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict",
     "prettier"
   ],
   overrides: [
@@ -16,10 +17,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
+    project: true,
+    tsconfigRootDir: __dirname,
   },
   plugins: [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "tailwindcss",
   ],
   rules: {
     // importing React in jsx is no longer neccesary with React 17 or later
