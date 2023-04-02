@@ -1,0 +1,34 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        cmd: ["lint:eslint", "lint:prettier"]
+
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+
+      - name: Determine the node version to use
+        id: node-version
+        run:
+          echo "determined=$(cat .tool-versions | grep "nodejs" | awk '{ print $2 }')"  >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.node-version.outputs.determined }}
+          cache: pnpm
+
+      - run: pnpm ${{ matrix.cmd }}
